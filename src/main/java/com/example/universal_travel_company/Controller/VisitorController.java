@@ -47,7 +47,7 @@ public class VisitorController {
         return "/Home";
     }
 
-    //-------------------------Directing to the Add User Page-------------------------
+    //-------------------------Directing to the Register User Page-------------------------
 
     @GetMapping("/createUser")
     public String RegisterUser(Model model) {
@@ -60,6 +60,7 @@ public class VisitorController {
     @PostMapping("/RegisterUser")
     public String addUser(@ModelAttribute("AddUser") UserDTO userdto, Model model) {
         try{
+            System.out.println("AAWAAAAAAAAAAA");
             User user = userservice.createUser(userdto);
             //Takes in the bound data from the JSP
             if(user == null){

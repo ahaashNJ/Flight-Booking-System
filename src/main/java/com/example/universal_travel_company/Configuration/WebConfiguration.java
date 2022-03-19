@@ -46,31 +46,31 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-        httpSecurity
-                .csrf().disable()
+//        httpSecurity
+//                .csrf().disable()
+//
+//                .authorizeRequests()
+//                .antMatchers("/webjars/**", "/CSS/**", "/Images/**", "/visitor/authorize", "/Login**", "/createUser**", "/RegisterUser**", "/WEB_INF/**")
+//                .permitAll()
+//                .anyRequest()
+//                .authenticated()
+//                .and()
+//                .formLogin()
+//                .loginPage("/Home")
+//                .loginProcessingUrl("/authenticate")
+//                .usernameParameter("email")
+//                .passwordParameter("password")
+//                .defaultSuccessUrl("/SuccessLogin")
+//                .permitAll()
+//                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+//                .and().logout()
+//                .logoutUrl("/logout")
+//                .invalidateHttpSession(true)
+//                .logoutSuccessUrl("/Home")
+//                .permitAll();
 
-                .authorizeRequests()
-                .antMatchers("/webjars/**", "/CSS/**", "/Images/**", "/visitor/authorize", "/Login**", "/createUser**")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/Home")
-                .loginProcessingUrl("/authenticate")
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/SuccessLogin")
-                .permitAll()
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .and().logout()
-                .logoutUrl("/logout")
-                .invalidateHttpSession(true)
-                .logoutSuccessUrl("/Home")
-                .permitAll();
-
-
-//        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.csrf().disable().authorizeRequests()
+                .anyRequest().permitAll();
 
 
     }

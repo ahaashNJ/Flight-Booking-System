@@ -52,12 +52,12 @@ public class UserService implements UserDetailsService {
             return null;
         }
         User user = new User();
-        user.setPassword(passwordEncoder.encode("Aa12345"));
+        user.setPassword(passwordEncoder.encode(userdto.getPassword()));
         user.setEmail(userdto.getEmail());
         user.setFirstName(userdto.getFirstName());
         user.setLastName(userdto.getLastName());
         user.setContactNumber(userdto.getContactNumber().toString());
-        user.setUserType(userdto.getUserType());
+        user.setUserType("Traveler");
         user.setApproveStatus("Yes");
 //        user.setDOB(userdto.getDob());
 
