@@ -50,7 +50,7 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
 
                 .authorizeRequests()
-                .antMatchers("/webjars/**", "/CSS/**", "/Images/**", "/visitor/authorize")
+                .antMatchers("/webjars/**", "/CSS/**", "/Images/**", "/visitor/authorize", "/Login**", "/createUser**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

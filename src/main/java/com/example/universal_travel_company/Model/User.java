@@ -40,6 +40,7 @@ public class User {
 
     @Column(name = "contact_number")
     @NotNull(message = "Contact Number Cannot Be Null")
+//    @Size(min = 10, max = 10, message = "Contact Number Should Contain 10 Characters")
     @Getter
     @Setter
     private String contactNumber;
@@ -51,13 +52,12 @@ public class User {
     private String password;
 
     @Column(name = "DOB")
-    @NotNull(message = "Date of Birth Cannot Be Null")
+//    @NotNull(message = "Date of Birth Cannot Be Null")
     @Getter
     @Setter
     private Date DOB;
 
     @Column(name = "approve_status")
-    @Size(min = 10, max = 10, message = "Contact Number Should Contain 10 Characters")
     @Getter
     @Setter
     private String approveStatus;

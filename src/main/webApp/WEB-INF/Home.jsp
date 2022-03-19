@@ -13,7 +13,7 @@
     <script src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Home.css">
-    <title>Hello</title>
+    <title>Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
@@ -44,12 +44,12 @@
                         <a class="nav-link" href="#!">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#!">Sign In</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/Login">Sign In</a>
                     </li>
                 </ul>
 
             </div>
-            <button class="outline" style="align-items: flex-end">Register</button>
+            <a class="outline" type="button" style="align-items: flex-end" href="${pageContext.request.contextPath}/createUser">Register</a>
         </div>
     </nav>
     <!-- Navbar -->
@@ -78,9 +78,8 @@
     <div class="" style="background-color: #414141; margin-left: -1%; margin-right: -1%">
         <footer class="text-center text-lg-start" style="padding: 10px 0">
             <div class="text-center p-3" style="color: #998d88">
-                © 2020 Copyright:
-                <a style="color: #998d88;" class="text-center p-3" href="${pageContext.request.contextPath}/login">Find
-                    My Lecture</a>
+                © 2022 Copyright:
+                <a style="color: #998d88;" class="text-center p-3" href="${pageContext.request.contextPath}/login">Universal Travel Company</a>
             </div>
         </footer>
     </div>

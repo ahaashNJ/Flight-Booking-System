@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
@@ -23,7 +25,7 @@ public class UserDTO {
 
     @Getter
     @Setter
-    private String dob;
+    private Date dob;
 
     @Getter
     @Setter
