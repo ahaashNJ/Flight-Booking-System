@@ -69,8 +69,8 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
 //                .logoutSuccessUrl("/Home")
 //                .permitAll();
 
-        httpSecurity.csrf().disable().authorizeRequests()
-                .anyRequest().permitAll();
+//        httpSecurity.csrf().disable().authorizeRequests()
+//                .anyRequest().permitAll();
 
 
     }

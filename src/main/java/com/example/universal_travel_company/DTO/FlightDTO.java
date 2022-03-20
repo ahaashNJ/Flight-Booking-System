@@ -1,9 +1,14 @@
 package com.example.universal_travel_company.DTO;
 
+import com.example.universal_travel_company.Model.Airplane;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.sql.Time;
+import java.sql.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -11,11 +16,11 @@ public class FlightDTO {
 
     @Getter
     @Setter
-    private String flightId;
+    private Integer flightId;
 
     @Getter
     @Setter
-    private String flightDate;
+    private Date flightDate;
 
     @Getter
     @Setter
@@ -35,6 +40,6 @@ public class FlightDTO {
 
     @Getter
     @Setter
-    private AirplaneDTO airplaneDTO;
+    private Airplane airplane;
 
 }
