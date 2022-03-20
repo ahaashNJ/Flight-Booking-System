@@ -31,13 +31,10 @@ public class FlightDTO {
 
     @Getter
     @Setter
-    private Integer noOfSeats;
+    private Integer remainingSeats;
 
     @Getter
     @Setter
     private AirplaneDTO airplaneDTO;
 
-    @Getter
-    @Setter
-    private UserDTO userDTO;
 }

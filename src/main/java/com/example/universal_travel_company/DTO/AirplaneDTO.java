@@ -20,4 +20,8 @@ public class AirplaneDTO {
     @Getter
     @Setter
     private Integer noOfSeats;
+
+    @Getter
+    @Setter
+    private Integer costPerSeat;
 }

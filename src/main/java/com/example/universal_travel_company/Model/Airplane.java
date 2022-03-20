@@ -35,4 +35,10 @@ public class Airplane {
     @Setter
     private int noOfSeats;
 
+    @Column(name = "costPerSeat")
+    @NotNull(message = "Cost of a Seat Should Not Be Null")
+    @Getter
+    @Setter
+    private int costPerSeat;
+
 }

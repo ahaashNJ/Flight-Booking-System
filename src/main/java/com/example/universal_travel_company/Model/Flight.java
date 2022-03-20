@@ -46,17 +46,17 @@ public class Flight {
     @Setter
     private Time time;
 
-    @Column(name = "no_of_seats")
-    @NotNull(message = "No Of Seats Cannot Be Null")
+    @Column(name = "remainder")
+    @NotNull(message = "remainder Cannot Be Null")
     @Getter
     @Setter
-    private int noOfSeats;
+    private int remainingSeats;
 
-    @ManyToOne
-    @JoinColumn(name = "user_email")
-    @Setter
-    @Getter
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_email")
+//    @Setter
+//    @Getter
+//    private User user;
 
     @ManyToOne
     @JoinColumn(name = "airplane_id")
