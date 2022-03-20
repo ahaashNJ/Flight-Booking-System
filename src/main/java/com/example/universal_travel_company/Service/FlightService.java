@@ -20,6 +20,7 @@ import java.util.ArrayList;
 //import java.util.Date;
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FlightService {
@@ -130,5 +131,42 @@ public class FlightService {
         flightRepository.deleteById(flightId);
     }
 
+    public FlightDTO viewSingleFlightById(int flightId) {
+        Optional<Flight> flightOptional = flightRepository.findById(flightId);
+
+
+        FlightDTO flightDTO = new FlightDTO();
+        Flight flightInfo = null;
+
+
+        if (flightOptional.isPresent()) {
+            flightInfo = flightOptional.get();
+
+            flightDTO.setFlightId(flightInfo.getFlightId());
+            flightDTO.setFlightDate(flightDTO.getFlightDate());
+            flightDTO.setFlightTime(flightDTO.getFlightTime());
+            flightDTO.setRemainingSeats(flightDTO.getRemainingSeats());
+            flightDTO.setFromLocation(flightDTO.getFromLocation());
+            flightDTO.setToLocation(flightDTO.getFromLocation());
+            flightDTO.setAirplane(flightDTO.getAirplane());
+
+        }
+
+        return flightDTO;
+    }
+
+
+    public Flight RescheduleFlight(FlightDTO flightDTO){
+
+        Flight flight = new Flight();
+
+        flight.setDate(flightDTO.getFlightDate());
+        flight.setTime(LocalTime.parse(flightDTO.getFlightTime()));
+        flight.setAirplane(flightDTO.getAirplane());
+
+        Optional<Flight> timetables = flightRepository.findById((flightDTO.getFlightId()));
+
+        return flightRepository.save(flight);
+    }
 
 }
