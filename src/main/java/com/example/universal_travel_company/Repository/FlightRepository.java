@@ -13,4 +13,5 @@ public interface FlightRepository extends JpaRepository<Flight,Integer> {
 
     List<Flight> findFlightsByAirplaneAndDate(Airplane airplane, Date date);
 
+
 }
