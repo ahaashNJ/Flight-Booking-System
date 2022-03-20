@@ -143,12 +143,12 @@ public class FlightService {
             flightInfo = flightOptional.get();
 
             flightDTO.setFlightId(flightInfo.getFlightId());
-            flightDTO.setFlightDate(flightDTO.getFlightDate());
-            flightDTO.setFlightTime(flightDTO.getFlightTime());
-            flightDTO.setRemainingSeats(flightDTO.getRemainingSeats());
-            flightDTO.setFromLocation(flightDTO.getFromLocation());
-            flightDTO.setToLocation(flightDTO.getFromLocation());
-            flightDTO.setAirplane(flightDTO.getAirplane());
+            flightDTO.setFlightDate(flightInfo.getDate());
+            flightDTO.setFlightTime(flightInfo.getTime().toString());
+            flightDTO.setRemainingSeats(flightInfo.getRemainingSeats());
+            flightDTO.setFromLocation(flightInfo.getFromLocation());
+            flightDTO.setToLocation(flightInfo.getFromLocation());
+            flightDTO.setAirplane(flightInfo.getAirplane());
 
         }
 
@@ -158,13 +158,11 @@ public class FlightService {
 
     public Flight RescheduleFlight(FlightDTO flightDTO){
 
-        Flight flight = new Flight();
+        Optional<Flight> timetables = flightRepository.findById((flightDTO.getFlightId()));
 
+        Flight flight = timetables.get();
         flight.setDate(flightDTO.getFlightDate());
         flight.setTime(LocalTime.parse(flightDTO.getFlightTime()));
-        flight.setAirplane(flightDTO.getAirplane());
-
-        Optional<Flight> timetables = flightRepository.findById((flightDTO.getFlightId()));
 
         return flightRepository.save(flight);
     }
