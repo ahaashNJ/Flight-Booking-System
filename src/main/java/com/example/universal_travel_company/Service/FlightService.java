@@ -167,4 +167,38 @@ public class FlightService {
         return flightRepository.save(flight);
     }
 
+    public List<FlightDTO> getAllFutureFlightsSearch(String location){
+
+        List<Flight> flightList = new ArrayList<>();
+        List<FlightDTO> flightDTOList = new ArrayList<>();
+
+        try {
+
+            flightList.addAll(flightRepository.searchFromLocation(location));
+
+//            flightList.addAll(flightRepository.searchFromDate(Date.valueOf(date)));
+
+            if (flightList != null) {
+                for (Flight flight : flightList) {
+                    if (flight.getDate().compareTo(new Date(System.currentTimeMillis())) > 0) {
+                        FlightDTO flightDTO = new FlightDTO();
+                        flightDTO.setFlightId(flight.getFlightId());
+                        flightDTO.setFlightDate(flight.getDate());
+                        flightDTO.setFlightTime(flight.getTime().toString());
+                        flightDTO.setFromLocation(flight.getFromLocation());
+                        flightDTO.setToLocation(flight.getToLocation());
+                        flightDTO.setAirplane(flight.getAirplane());
+                        flightDTOList.add(flightDTO);
+                    }
+                }
+            }
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+
+
+        return flightDTOList;
+    }
+
 }

@@ -34,13 +34,14 @@
             <ul class="navbar-nav mx-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link item"href="${pageContext.request.contextPath}/TravelerHome">Home</a>
+                    <a class="nav-link item" href="${pageContext.request.contextPath}/TravelerHome">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link item" href="${pageContext.request.contextPath}/Traveler/MyAccount">My Account</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link item" href="${pageContext.request.contextPath}/Traveler/MyBookings">My Bookings</a>
+                    <a class="nav-link item" href="${pageContext.request.contextPath}/Traveler/MyBookings">My
+                        Bookings</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link item" href="${pageContext.request.contextPath}/ContactUs">ContactUs</a>
@@ -54,47 +55,54 @@
 </nav>
 <div class="container">
     <div style="margin-top: 80px;">
-        <form:form id="formSubmit" modelAttribute="flights" method="get">
-            <div class="col-lg-12 col-md-12 col-sm-12 container justify-content-center">
-                <h2 style="color: #414141; margin-top: 25px; align-items: center; text-align: center; font-weight: 600; font-size: 40px;">Book Your Flight Now</h2>
-                <table class="table" style="width: 100%; margin-top: 25px;">
-                    <thead>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 container justify-content-center">
+            <h2 style="color: #414141; margin-top: 25px; align-items: center; text-align: center; font-weight: 600; font-size: 40px;">
+                Book Your Flight Now</h2>
+            <form:form action="${pageContext.request.contextPath}/Traveler/SearchFlightName" id="formSubmit" modelAttribute="flights" method="get">
+                <div class="input-group">
+                    <input type="search" class="form-control rounded" placeholder="Search..." name="searchItem" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="submit" class="btn btn-outline-primary">search</button>
+                </div>
+            </form:form>
+            <table class="table" style="width: 100%; margin-top: 25px;">
+                <thead>
+                <tr>
+                    <th style="width: 15%; color: #414141; text-align: center">Flight ID</th>
+                    <th style="width: 15%; color: #414141; text-align: center">Plane Name</th>
+                    <th style="width: 20%; color: #414141; text-align: center">Start Location</th>
+                    <th style="width: 20%; color: #414141; text-align: center">End Location</th>
+                    <th style="width: 30%; color: #414141; text-align: center">Date</th>
+                    <th style="width: 30%; color: #414141; text-align: center">Time</th>
+                    <th style="width: 5%; color: #414141; text-align: center">Book</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${flights}" var="flights">
                     <tr>
-                        <th style="width: 15%; color: #414141; text-align: center">Flight ID</th>
-                        <th style="width: 15%; color: #414141; text-align: center">Plane Name</th>
-                        <th style="width: 20%; color: #414141; text-align: center">Start Location</th>
-                        <th style="width: 20%; color: #414141; text-align: center">End Location</th>
-                        <th style="width: 30%; color: #414141; text-align: center">Date</th>
-                        <th style="width: 30%; color: #414141; text-align: center">Time</th>
-                        <th style="width: 5%; color: #414141; text-align: center">Book</th>
+                        <td style="text-align: center">${flights.flightId}</td>
+                        <td style="text-align: center">${flights.airplane.airplaneName}</td>
+                        <td style="text-align: center">${flights.fromLocation}</td>
+                        <td style="text-align: center">${flights.toLocation}</td>
+                        <td style="text-align: center">${flights.flightDate}</td>
+                        <td style="text-align: center">${flights.flightTime}</td>
+                        <td style="text-align: center"><a type="button" class="btn btn-outline-info"
+                                                          href="${pageContext.request.contextPath}/Traveler/BookFlight/${flights.flightId}">Book</a>
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${flights}" var="flights">
-                        <tr>
-                            <td style="text-align: center">${flights.flightId}</td>
-                            <td style="text-align: center">${flights.airplane.airplaneName}</td>
-                            <td style="text-align: center">${flights.fromLocation}</td>
-                            <td style="text-align: center">${flights.toLocation}</td>
-                            <td style="text-align: center">${flights.flightDate}</td>
-                            <td style="text-align: center">${flights.flightTime}</td>
-                            <td style="text-align: center"><a type="button" class="btn btn-outline-info"
-                                   href="${pageContext.request.contextPath}/Traveler/BookFlight/${flights.flightId}">Book</a></td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-            <div>
-                <p style="display: none" id="errorMessage">${error}</p>
-            </div>
-            <div>
-                <p style="display: none" id="successMessage">${success}</p>
-            </div>
-            <div>
-                <p style="display: none" id="successMessageUpdate">${successUpdate}</p>
-            </div>
-        </form:form>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <p style="display: none" id="errorMessage">${error}</p>
+        </div>
+        <div>
+            <p style="display: none" id="successMessage">${success}</p>
+        </div>
+        <div>
+            <p style="display: none" id="successMessageUpdate">${successUpdate}</p>
+        </div>
     </div>
 </div>
 </body>

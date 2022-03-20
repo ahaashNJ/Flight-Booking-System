@@ -1,6 +1,7 @@
 package com.example.universal_travel_company.DTO;
 
 import com.example.universal_travel_company.Model.Airplane;
+import com.example.universal_travel_company.Model.Flight;
 import com.example.universal_travel_company.Model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,5 +30,10 @@ public class BookingDTO {
 
     @Getter
     @Setter
-    private Airplane airplane;
+    private Flight flight;
+
+    @Getter
+    @Setter
+    private String approveStatus;
+
 }

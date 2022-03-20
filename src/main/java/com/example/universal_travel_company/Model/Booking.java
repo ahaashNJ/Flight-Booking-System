@@ -35,4 +35,9 @@ public class Booking {
     @Setter
     @Getter
     private User user;
+
+    @Column(name = "approve_status")
+    @Getter
+    @Setter
+    private String approveStatus;
 }
