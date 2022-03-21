@@ -73,15 +73,15 @@
                     <div class="requestForm">
                         <form:form action="/RegisterUser" method="POST" modelAttribute="AddUser">
                             <div class="form-group">
-                                <form:input path="firstName" type="text" required="true" maxlength="20"
+                                <form:input path="firstName" type="text" required="true" maxlength="20" minlength="4"
                                             placeholder="First Name" cssClass="form-control"/>
                             </div>
                             <div class="form-group">
-                                <form:input path="lastName" type="text" required="true" maxlength="20"
+                                <form:input path="lastName" type="text" required="true" maxlength="20" minlength="4"
                                             placeholder="Last Name" cssClass="form-control"/>
                             </div>
                             <div class="form-group">
-                                <form:input path="email" type="email" required="true" maxlength="50"
+                                <form:input path="email" type="email" required="true" maxlength="50" minlength="10"
                                             pattern=".+@gmail.com"
                                             title="The email should contain '@gmail.com' werbserver"
                                             placeholder="Email Address" cssClass="form-control"/>
@@ -101,10 +101,11 @@
                             </div>
 <%--                            <button type="submit" class="btn btn-primary">Register</button>--%>
                             <input class="btn-primary" type="submit" value="Register" id="submit-btn">
-                            <div class="Message">
-                                <div>${success}${error}</div>
-                            </div>
+
                         </form:form>
+                    </div>
+                    <div class="Message w-50">
+                        <div class="alert-danger">${success}${error}</div>
                     </div>
                 </div>
             </div>
@@ -127,38 +128,70 @@
     password.onchange = validatePassword;
     confirm_password.onkeyup = validatePassword;
 </script>
-<%--<div class="requestForm">--%>
-<%--    <h3>Add User</h3>--%>
-<%--    <form:form action="/RegisterUser" method="POST" modelAttribute="AddUser">--%>
-<%--        <div class="formBox">--%>
-<%--            <div class="inputBox w50">--%>
-<%--                    &lt;%&ndash;                <form:input path="firstName" type = "text" required="true" maxlength="20"/>&ndash;%&gt;--%>
-<%--                <span>First Name</span>--%>
-<%--            </div>--%>
-<%--            <div class="inputBox w50">--%>
-<%--                <form:input path="lastName" type="text" required="true" maxlength="20"/>--%>
-<%--                <span>Last Name</span>--%>
-<%--            </div>--%>
-<%--            <div class="inputBox w50">--%>
-<%--                <form:input path="email" type="email" required="true" maxlength="50" pattern=".+@gmail.com"--%>
-<%--                            title="The email should contain '@gmail.com' werbserver"/>--%>
-<%--                <span>Email</span>--%>
-<%--            </div>--%>
-<%--            <div class="inputBox w50">--%>
-<%--                <form:input path="contactNumber" type="text" required="true" minlength="10" maxlength="10"--%>
-<%--                            pattern="[0-9]+" title="Please be advised to only include numbers"/>--%>
-<%--                <span>Contact number</span>--%>
-<%--            </div>--%>
-
-<%--            <div class="inputBox w100">--%>
-<%--                <input type="submit" value="Create">--%>
-<%--            </div>--%>
-
-<%--            <div class="Message">--%>
-<%--                <div>${success}${error}</div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </form:form>--%>
-<%--</div>--%>
+<script>
+    window.onload = function () {
+        const errorMessage = document.getElementById("errorMessage").innerHTML;
+        const successMessage = document.getElementById("successMessage").innerHTML;
+        const successUpdate = document.getElementById("successUpdate").innerHTML;
+        if (errorMessage !== "") {
+            Swal.fire({
+                title: "Error occurred while deleting!!!",
+                text: errorMessage,
+                icon: "error",
+            });
+        }
+        if (successMessage !== "") {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: successMessage,
+                showConfirmButton: false,
+                timer: 3000
+            });
+        }
+        if (successUpdate !== "") {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: successMessage,
+                showConfirmButton: false,
+                timer: 3000
+            });
+        }
+    }
+    function confirmDelete(name) {
+        Swal.fire({
+            icon: 'question',
+            title: 'Sure you want to delete this Flight?',
+            text: 'This action cannot be reversed!',
+            showCancelButton: true,
+            confirmButtonText: `Yes!`,
+            cancelButtonText: 'Nope!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/Admin/DeleteFlight/' + name;
+                Swal.fire({
+                    title: 'Deleting...',
+                    html: 'Hold on a few seconds while we delete the Flight!',
+                    timer: 10000,
+                    timerProgressBar: false,
+                });
+            }
+        })
+    }
+    function logout() {
+        Swal.fire({
+            icon: 'question',
+            title: 'Sure you want to logout?',
+            showCancelButton: true,
+            confirmButtonText: `Yes!`,
+            cancelButtonText: 'Nope!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('logout').click();
+            }
+        })
+    }
+</script>
 </body>
 </html>

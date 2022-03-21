@@ -29,53 +29,49 @@ public class VisitorController {
         return "Login";
     }
 
+    //Role Based Login
     @GetMapping("/SuccessLogin")
     public String successLogin(Model model, Authentication auth){
         System.out.println("Coming to login");
         User usertype = userservice.directUserType(auth.getName());
-        //Take the user type of the logged in user
 
         if(usertype.getUserType().equals("Admin")){
-            return "redirect:/AdminHome";
-            //Directs to the admin home page if the user is admin
+            return "redirect:/Admin/AdminHome";
         }
         if(usertype.getUserType().equals("Traveler")){
             model.addAttribute("loggedUser", userservice.directUserType(auth.getName()));
             return "redirect:/TravelerHome";
-            //Directs to the traveler home page if the user is traveler
         }
 
         return "/Home";
     }
 
-    //-------------------------Directing to the Register User Page-------------------------
-
+    //Directs the User to the Register page
     @GetMapping("/createUser")
     public String RegisterUser(Model model) {
-        model.addAttribute("AddUser", new UserDTO());
-        //Binding the form fields of JSP to Object
+        try {
+            model.addAttribute("AddUser", new UserDTO());
+        }
+        catch(Exception exception){
+            model.addAttribute("error", exception.getMessage());
+        }
         return "/Register";
     }
 
-    //-------------------------Add User to the System-------------------------
+    //Add User to the System
     @PostMapping("/RegisterUser")
     public String addUser(@ModelAttribute("AddUser") UserDTO userdto, Model model) {
         try{
-            System.out.println("AAWAAAAAAAAAAA");
             User user = userservice.createUser(userdto);
-            //Takes in the bound data from the JSP
             if(user == null){
                 model.addAttribute("error","Email exists in the System");
-                //Binding error message
                 System.out.println("error");
             }
             else{
                 model.addAttribute("success","User Added Successfully");
-                //Binding success message
             }
         }catch (Exception e){
             model.addAttribute("error","Failed To Add User");
-            //Binding error message for exceptions
         }
         return "/Register";
     }

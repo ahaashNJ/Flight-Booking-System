@@ -7,6 +7,7 @@ import com.example.universal_travel_company.Model.User;
 import com.example.universal_travel_company.Service.BookingService;
 import com.example.universal_travel_company.Service.FlightService;
 import com.example.universal_travel_company.Service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

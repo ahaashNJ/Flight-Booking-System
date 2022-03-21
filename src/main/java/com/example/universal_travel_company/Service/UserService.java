@@ -28,6 +28,7 @@ public class UserService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
 
+    //Credentials for Login Authentication
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findUserByEmail(email);
@@ -43,32 +44,33 @@ public class UserService implements UserDetailsService {
         }
     }
 
+    //Find User by email address
     public User directUserType(String email){
         return userRepository.findUserByEmail(email);
     }
 
-    public User createUser(UserDTO userdto) {
-
-        if(userRepository.findById(userdto.getEmail()).isPresent()){
-            return null;
-        }
+    //Add a user to the system
+    public User createUser(UserDTO userdto) throws Exception {
         User user = new User();
-        user.setPassword(passwordEncoder.encode(userdto.getPassword()));
-        user.setEmail(userdto.getEmail());
-        user.setFirstName(userdto.getFirstName());
-        user.setLastName(userdto.getLastName());
-        user.setContactNumber(userdto.getContactNumber().toString());
-        user.setUserType("Traveler");
-        user.setApproveStatus("Yes");
-//        user.setDOB(userdto.getDob());
 
+        if(userdto!=null){
+            if(userRepository.findById(userdto.getEmail()).isPresent()){
+                return null;
+            }
 
+            user.setPassword(passwordEncoder.encode(userdto.getPassword()));
+            user.setEmail(userdto.getEmail());
+            user.setFirstName(userdto.getFirstName());
+            user.setLastName(userdto.getLastName());
+            user.setContactNumber(userdto.getContactNumber().toString());
+            user.setUserType("Traveler");
+            user.setApproveStatus("Yes");
+        }
+        else{
+            throw new Exception("User Details Were Not Added");
+        }
 
         return userRepository.save(user);
     }
 
-    public User getUserByID(String email) {
-        Optional<User> user = userRepository.findById(email);
-        return user.orElse(null);
-    }
 }

@@ -2,22 +2,13 @@ package com.example.universal_travel_company.Service;
 
 import com.example.universal_travel_company.DTO.FlightDTO;
 import com.example.universal_travel_company.Model.Flight;
-import com.example.universal_travel_company.Repository.AirplaneRepository;
 import com.example.universal_travel_company.Repository.FlightRepository;
-import com.example.universal_travel_company.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-//import java.util.Date;
 import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
@@ -26,23 +17,21 @@ import java.util.Optional;
 public class FlightService {
 
     @Autowired
-    private AirplaneRepository airplaneRepository;
-
-    @Autowired
     private FlightRepository flightRepository;
 
+    //Schedule the Flight
     public Flight scheduleFlight(FlightDTO flightDTO) throws Exception {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         java.util.Date start = sdf.parse(String.format("%s %s", flightDTO.getFlightDate(), flightDTO.getFlightTime()));
         Flight flight = new Flight();
 
-        //checks if information is retrieved to back end
+        //avoid null pointer
         if (flightDTO != null) {
             //Date validation to check if the date is in the past
             if (start.before(new Date(System.currentTimeMillis()))) {
                 throw new Exception("Entered Date/Time has passed. Please Enter a Valid Date/Time period");
             }
-            if (start.compareTo(new Date(System.currentTimeMillis()))>30) {
+            if (start.compareTo(new Date(System.currentTimeMillis())) > 30) {
 
                 throw new Exception("Scheduling can be done with more than one month prior to the Flight Date");
             }
@@ -80,6 +69,7 @@ public class FlightService {
         return flightRepository.save(flight);
     }
 
+    //View All Flights in the database
     public List<FlightDTO> viewAllFlights() {
 
         List<Flight> flightList = flightRepository.findAll();
@@ -103,6 +93,7 @@ public class FlightService {
 
     }
 
+    //View Only the Future Flights
     public List<FlightDTO> viewAllFutureFlights() {
 
         List<Flight> flightList = flightRepository.findAll();
@@ -127,10 +118,12 @@ public class FlightService {
 
     }
 
+    //Delete A Flight
     public void deleteFlightById(int flightId) {
         flightRepository.deleteById(flightId);
     }
 
+    //View single flight info
     public FlightDTO viewSingleFlightById(int flightId) {
         Optional<Flight> flightOptional = flightRepository.findById(flightId);
 
@@ -155,19 +148,47 @@ public class FlightService {
         return flightDTO;
     }
 
-
-    public Flight RescheduleFlight(FlightDTO flightDTO){
+    //Update Flight date and time only
+    public Flight RescheduleFlight(FlightDTO flightDTO) throws Exception {
 
         Optional<Flight> timetables = flightRepository.findById((flightDTO.getFlightId()));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        java.util.Date start = sdf.parse(String.format("%s %s", flightDTO.getFlightDate(), flightDTO.getFlightTime()));
 
         Flight flight = timetables.get();
-        flight.setDate(flightDTO.getFlightDate());
-        flight.setTime(LocalTime.parse(flightDTO.getFlightTime()));
+
+        if(flightDTO!=null){
+
+            if (start.before(new Date(System.currentTimeMillis()))) {
+                throw new Exception("Entered Date/Time has passed. Please Enter a Valid Date/Time period");
+            }
+            if (start.compareTo(new Date(System.currentTimeMillis())) > 30) {
+
+                throw new Exception("Scheduling can be done with more than one month prior to the Flight Date");
+            }
+            List<Flight> FlightList = flightRepository.findFlightsByAirplaneAndDate(flightDTO.getAirplane(), Date.valueOf(flightDTO.getFlightDate().toString()));
+
+            for (Flight flightInfo : FlightList) {
+
+                if (flightDTO.getFlightDate().equals(flightInfo.getDate())) {
+
+                    throw new Exception("Error Occurred, The " + flightDTO.getAirplane().getAirplaneName() + " is already Booked on the given date");
+                }
+            }
+
+            flight.setDate(flightDTO.getFlightDate());
+            flight.setTime(LocalTime.parse(flightDTO.getFlightTime()));
+        }
+        else{
+
+        }
+
 
         return flightRepository.save(flight);
     }
 
-    public List<FlightDTO> getAllFutureFlightsSearch(String location){
+    //Search function for flights by location
+    public List<FlightDTO> getAllFutureFlightsSearch(String location) {
 
         List<Flight> flightList = new ArrayList<>();
         List<FlightDTO> flightDTOList = new ArrayList<>();
@@ -175,8 +196,6 @@ public class FlightService {
         try {
 
             flightList.addAll(flightRepository.searchFromLocation(location));
-
-//            flightList.addAll(flightRepository.searchFromDate(Date.valueOf(date)));
 
             if (flightList != null) {
                 for (Flight flight : flightList) {
@@ -192,8 +211,7 @@ public class FlightService {
                     }
                 }
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
 
