@@ -151,11 +151,11 @@ public class FlightService {
     //Update Flight date and time only
     public Flight RescheduleFlight(FlightDTO flightDTO) throws Exception {
 
-        Optional<Flight> timetables = flightRepository.findById((flightDTO.getFlightId()));
+        Optional<Flight> Flight = flightRepository.findById((flightDTO.getFlightId()));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         java.util.Date start = sdf.parse(String.format("%s %s", flightDTO.getFlightDate(), flightDTO.getFlightTime()));
 
-        Flight flight = timetables.get();
+        Flight flight = Flight.get();
 
         if(flightDTO!=null){
 

@@ -93,9 +93,6 @@
             <div>
                 <p style="display: none" id="successMessage">${success}</p>
             </div>
-            <div>
-                <p style="display: none" id="successMessageUpdate">${successUpdate}</p>
-            </div>
         </form:form>
     </div>
 </div>
@@ -106,7 +103,6 @@
     window.onload = function () {
         const errorMessage = document.getElementById("errorMessage").innerHTML;
         const successMessage = document.getElementById("successMessage").innerHTML;
-        const successUpdate = document.getElementById("successUpdate").innerHTML;
         if (errorMessage !== "") {
             Swal.fire({
                 title: "Error occurred while deleting!!!",

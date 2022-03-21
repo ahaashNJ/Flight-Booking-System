@@ -39,7 +39,6 @@ public class TravelerController {
     @GetMapping("/TravelerHome")
     public String travelerHome(Authentication auth, Model model) {
         List<FlightDTO> flightDTOList = flightService.viewAllFutureFlights();
-//        User user = userService.(auth.getName());
         model.addAttribute("flights", flightDTOList);
         return "TravelerHome";
     }
@@ -47,8 +46,6 @@ public class TravelerController {
     @GetMapping("/Traveler/SearchFlightName")
     public String getBatchSearchRequest(HttpServletRequest request, Model model) throws ParseException {
         String searchItem = request.getParameter("searchItem");
-//        SimpleDateFormat searchDate = new SimpleDateFormat("yyyy-MM-dd");
-//        Date startDate = searchDate.parse(Date);
         List<FlightDTO> allFlights = flightService.getAllFutureFlightsSearch(searchItem);
 
         model.addAttribute("flights", allFlights);
@@ -58,15 +55,10 @@ public class TravelerController {
     @GetMapping("Traveler/BookFlight/{flightId}")
     public String ScheduleClass(@PathVariable(value = "flightId") int flightId, Model model, Authentication auth) {
         FlightDTO flight = flightService.viewSingleFlightById(flightId);
-        //Getting the module ID of the clicked record
         User usertype = userService.directUserType(auth.getName());
         model.addAttribute("loggedUser", userService.directUserType(auth.getName()));
         model.addAttribute("FlightDetails", flight);
-//        UserDTO userDTO = new UserDTO();
-//        model.addAttribute("UserDetails",userDTO);
-        //Binds the module details of clicked record to the JSP
         model.addAttribute("placeBooking", new BookingDTO());
-        //Binds the form fields of JSP to object
         return "Booking";
     }
 
@@ -77,12 +69,9 @@ public class TravelerController {
             User usertype = userService.directUserType(auth.getName());
             model.addAttribute("loggedUser", userService.directUserType(auth.getName()));
             bookingService.placeBooking(bookingDTO);
-            //Takes in the data from the bound fields
             model.addAttribute("success", "Tickets Booked Successfully");
-            //Bind success message
         }catch(Exception e){
             model.addAttribute("error", "Failed To Book Tickets");
-            //Bind error message
         }
 
         return "Booking";
