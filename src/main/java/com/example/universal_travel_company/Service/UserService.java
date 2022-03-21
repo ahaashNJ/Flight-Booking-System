@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -64,5 +65,10 @@ public class UserService implements UserDetailsService {
 
 
         return userRepository.save(user);
+    }
+
+    public User getUserByID(String email) {
+        Optional<User> user = userRepository.findById(email);
+        return user.orElse(null);
     }
 }

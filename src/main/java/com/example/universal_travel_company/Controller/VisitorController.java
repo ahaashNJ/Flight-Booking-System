@@ -30,7 +30,7 @@ public class VisitorController {
     }
 
     @GetMapping("/SuccessLogin")
-    public String successLogin(Authentication auth){
+    public String successLogin(Model model, Authentication auth){
         System.out.println("Coming to login");
         User usertype = userservice.directUserType(auth.getName());
         //Take the user type of the logged in user
@@ -40,6 +40,7 @@ public class VisitorController {
             //Directs to the admin home page if the user is admin
         }
         if(usertype.getUserType().equals("Traveler")){
+            model.addAttribute("loggedUser", userservice.directUserType(auth.getName()));
             return "redirect:/TravelerHome";
             //Directs to the traveler home page if the user is traveler
         }

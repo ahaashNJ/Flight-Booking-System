@@ -147,7 +147,7 @@ public class FlightService {
             flightDTO.setFlightTime(flightInfo.getTime().toString());
             flightDTO.setRemainingSeats(flightInfo.getRemainingSeats());
             flightDTO.setFromLocation(flightInfo.getFromLocation());
-            flightDTO.setToLocation(flightInfo.getFromLocation());
+            flightDTO.setToLocation(flightInfo.getToLocation());
             flightDTO.setAirplane(flightInfo.getAirplane());
 
         }

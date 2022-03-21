@@ -24,6 +24,11 @@ public class Booking {
     @Setter
     private int totalPrice;
 
+    @Column(name = "no_of_seats")
+    @Getter
+    @Setter
+    private int noOfSeats;
+
     @ManyToOne
     @JoinColumn(name = "flight_id")
     @Setter
