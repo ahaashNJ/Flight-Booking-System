@@ -1,8 +1,10 @@
 package com.example.universal_travel_company.Controller;
 
 import com.example.universal_travel_company.DTO.AirplaneDTO;
+import com.example.universal_travel_company.DTO.BookingDTO;
 import com.example.universal_travel_company.DTO.FlightDTO;
 import com.example.universal_travel_company.Service.AirplaneService;
+import com.example.universal_travel_company.Service.BookingService;
 import com.example.universal_travel_company.Service.FlightService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -18,9 +20,12 @@ public class AdminController {
 
     private final FlightService flightService;
 
-    public AdminController(AirplaneService airplaneService, FlightService flightService) {
+    private final BookingService bookingService;
+
+    public AdminController(AirplaneService airplaneService, FlightService flightService, BookingService bookingService) {
         this.airplaneService = airplaneService;
         this.flightService = flightService;
+        this.bookingService = bookingService;
     }
 
     //load Admin Homepage on redirect from login
@@ -99,6 +104,15 @@ public class AdminController {
         }
 
         return "redirect:/Admin/ViewFlights";
+    }
+
+    //View All Bookings By Admin
+    @GetMapping("/Admin/ViewBookings")
+    public String viewAllBookings(Model model) {
+        List<BookingDTO> BookingDTOList = bookingService.getALlBookings();
+
+        model.addAttribute("bookings", BookingDTOList);
+        return "/ViewBookingsAdmin";
     }
 
 }

@@ -37,14 +37,14 @@
                     <a class="nav-link item" href="${pageContext.request.contextPath}/TravelerHome">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link item" href="${pageContext.request.contextPath}/Traveler/MyAccount">My Account</a>
+                    <a class="nav-link item" href="#">My Account</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link item" href="${pageContext.request.contextPath}/Traveler/MyBookings">My
+                    <a class="nav-link item" href="#">My
                         Bookings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link item" href="${pageContext.request.contextPath}/ContactUs">ContactUs</a>
+                    <a class="nav-link item" href="#">ContactUs</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link item" href="/logout">Sign Out</a>

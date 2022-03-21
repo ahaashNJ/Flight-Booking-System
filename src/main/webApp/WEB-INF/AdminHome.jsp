@@ -39,10 +39,10 @@
                     <a class="nav-link item"href="/Admin/AdminHome">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link item"href="${pageContext.request.contextPath}/ViewTodayTimetable/">Today Flights</a>
+                    <a class="nav-link item"href="#">Today Flights</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link item"href="${pageContext.request.contextPath}/getAdminAccount/">My Account</a>
+                    <a class="nav-link item"href="#">My Account</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link item" href="/logout">Logout</a>
@@ -69,10 +69,10 @@
                             <h4 class="card-title" style="text-align: center">User Handler</h4>
                         </div>
                         <div class="card-read-more">
-                            <a href="${pageContext.request.contextPath}/createUser" class="btn btn-link btn-block">Add Users</a>
+                            <a href="#" class="btn btn-link btn-block">Add Users</a>
                         </div>
                         <div class="card-read-more">
-                            <a href="ViewUsers" class="btn btn-link btn-block">View All Users</a>
+                            <a href="#" class="btn btn-link btn-block">View All Users</a>
                         </div>
                     </div>
                 </div>
@@ -85,10 +85,10 @@
                             <h4 class="card-title" style="text-align: center">Aeroplane Handler</h4>
                         </div>
                         <div class="card-read-more">
-                            <a href="${pageContext.request.contextPath}/createBatch" class="btn btn-link btn-block">Add Plane</a>
+                            <a href="#" class="btn btn-link btn-block">Add Plane</a>
                         </div>
                         <div class="card-read-more">
-                            <a href="ViewBatches" class="btn btn-link btn-block">View All Planes</a>
+                            <a href="#" class="btn btn-link btn-block">View All Planes</a>
                         </div>
                     </div>
                 </div>
@@ -116,11 +116,8 @@
                         <div class="card-content" style="align-items: center; justify-content: center">
                             <h4 class="card-title" style="text-align: center">Booking Handler</h4>
                         </div>
-<%--                        <div class="card-read-more">--%>
-<%--                            <a href="${pageContext.request.contextPath}/ViewBatchesForSchedule" class="btn btn-link btn-block">Schedule Class</a>--%>
-<%--                        </div>--%>
                         <div class="card-read-more" style="margin-bottom: 45px">
-                        <a href="viewTimeTable" class="btn btn-link btn-block" style="font-size: 20px">View Bookings</a>
+                        <a href="/Admin/ViewBookings" class="btn btn-link btn-block" style="font-size: 20px">View Bookings</a>
                         </div>
                     </div>
                 </div>

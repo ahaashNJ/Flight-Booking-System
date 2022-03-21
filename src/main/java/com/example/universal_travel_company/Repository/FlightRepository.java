@@ -17,5 +17,8 @@ public interface FlightRepository extends JpaRepository<Flight,Integer> {
     @Query("FROM flight f where f.toLocation LIKE %:location% OR f.fromLocation LIKE %:location%")
     List<Flight> searchFromLocation(String location);
 
+    @Query("FROM flight f where f.time=:times")
+    List<Flight> findFlightByDates(String times);
+
 
 }
