@@ -6,7 +6,7 @@ JSP and CSS were used to develop the frontend designs
 
 ![image](https://user-images.githubusercontent.com/68497024/161439504-e37e3030-ac6b-4a7e-9c6b-46c46d289942.png)
 
-Spring Security was used for to successfully implement authentication and authorization functions.
+Spring Security was used to successfully implement authentication and authorization functions.
 
 ![image](https://user-images.githubusercontent.com/68497024/161439679-6901e297-5228-448a-8aab-b59a413fb0b1.png)
 
